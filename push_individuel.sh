@@ -11,7 +11,7 @@ format_commit_message() {
   local filepath=$1
   local extension="${filepath##*.}"  # Extraire l'extension
   local filename=$(basename "$filepath")  # Nom du fichier sans le chemin
-  local first_line=$(head -n 1 "$filepath")  # Première ligne du fichier
+  local first_line=$(head -n 1 "$filepath" 2>/dev/null)  # Première ligne du fichier
 
   case $extension in
     ts)
@@ -32,10 +32,19 @@ format_commit_message() {
   esac
 }
 
-# Parcourir chaque fichier modifié ou non suivi
-for file in $(git status --porcelain | awk '{print $2}'); do
+# Récupérer tous les fichiers non suivis ou modifiés
+files=$(git status --porcelain | grep -E "^[ MADRCU]" | awk '{print $2}')
+
+# Vérifier si des fichiers sont présents
+if [ -z "$files" ]; then
+  echo "Aucun fichier à commiter."
+  exit 0
+fi
+
+# Parcourir chaque fichier
+for file in $files; do
   if [ -f "$file" ]; then
-    # Ajouter le fichier
+    # Ajouter le fichier au staging
     git add "$file"
 
     # Générer un message de commit basé sur le contenu du fichier
