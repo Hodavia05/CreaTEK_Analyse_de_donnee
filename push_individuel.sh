@@ -1,17 +1,15 @@
 #!/bin/bash
 
-# Vérifier si on est dans un dépôt Git
 if [ ! -d ".git" ]; then
   echo "Ce répertoire n'est pas un dépôt Git. Initialisez un dépôt avec 'git init'."
   exit 1
 fi
 
-# Fonction pour formater le message de commit en fonction du contenu du fichier
 format_commit_message() {
   local filepath=$1
-  local extension="${filepath##*.}"  # Extraire l'extension
-  local filename=$(basename "$filepath")  # Nom du fichier sans le chemin
-  local first_line=$(head -n 1 "$filepath" 2>/dev/null)  # Première ligne du fichier
+  local extension="${filepath##*.}"
+  local filename=$(basename "$filepath")
+  local first_line=$(head -n 1 "$filepath" 2>/dev/null)
 
   case $extension in
     ts)
@@ -32,32 +30,25 @@ format_commit_message() {
   esac
 }
 
-# Récupérer tous les fichiers modifiés, ajoutés ou non suivis
 files=$(git ls-files --others --modified --exclude-standard)
 
-# Vérifier si des fichiers sont présents
 if [ -z "$files" ]; then
   echo "Aucun fichier à commiter."
   exit 0
 fi
 
-# Parcourir chaque fichier
 for file in $files; do
   if [ -f "$file" ]; then
-    # Ajouter le fichier au staging
     git add "$file"
 
-    # Générer un message de commit basé sur le contenu du fichier
     commit_message=$(format_commit_message "$file")
 
-    # Faire le commit
     git commit -m "$commit_message"
 
     echo "Fichier $file commité avec le message : '$commit_message'."
   fi
 done
 
-# Pousser tous les commits
 git push origin main
 
 echo "Tous les fichiers ont été committés et poussés avec succès."
