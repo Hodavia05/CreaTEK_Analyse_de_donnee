@@ -32,8 +32,8 @@ format_commit_message() {
   esac
 }
 
-# Récupérer tous les fichiers modifiés, ajoutés, supprimés ou en conflit
-files=$(git status --porcelain | grep -E "^[ MADRCU]" | awk '{print $2}')
+# Récupérer tous les fichiers modifiés, ajoutés ou non suivis
+files=$(git ls-files --others --modified --exclude-standard)
 
 # Vérifier si des fichiers sont présents
 if [ -z "$files" ]; then
@@ -44,13 +44,6 @@ fi
 # Parcourir chaque fichier
 for file in $files; do
   if [ -f "$file" ]; then
-    # Résoudre les fichiers en conflit (statut U) automatiquement
-    status=$(git status --porcelain | grep "$file" | awk '{print $1}')
-    if [[ $status == "U" ]]; then
-      echo "Résolution automatique du fichier en conflit : $file"
-      git add "$file"
-    fi
-
     # Ajouter le fichier au staging
     git add "$file"
 
