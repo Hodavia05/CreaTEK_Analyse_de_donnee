@@ -18,14 +18,13 @@
 
 ## 🚀 Fonctionnalités
 ### Visualisation des Ventes
-- Graphiques dynamiques pour suivre les performances par produit.
+- Graphiques dynamiques pour suivre les performances des produits.
 - Analyse des tendances saisonnières et des pics de ventes.
 
 ### Filtres Personnalisés
 - Affinez les analyses par :
-  - Type de bracelet
+  - Vente de bracelet
   - Période
-  - Région
 
 ---
 
@@ -66,12 +65,27 @@ Assurez-vous d'avoir les logiciels suivants installés sur votre machine :
 CreaTEK_Analyse_de_donnee/
 ├── src/
 │   ├── components/       # Composants React (Graphiques, Tableaux)
-│   ├── data/             # Données des ventes
-│   ├── pages/            # Pages principales de l’application
-│   └── App.tsx          # Point d’entrée de l’application
-├── public/               # Fichiers statiques
-├── package.json          # Fichier des dépendances
-└── README.md             # Documentation du projet
+│   ├── analytics/        # Gestion des analyses de données et calculs statistiques
+│   ├── dashboard/        # Pages principales de l’application pour la visualisation des données
+│   ├── inventory/        # Gestion des stocks et données produits
+│   ├── layout/           # Composants d’agencement global (en-tête, pied de page)
+│   ├── sales/            # Gestion des ventes, incluant les modèles de données liés
+│   ├── data/             # Données statiques utilisées dans l’application
+│   ├── hooks/            # Hooks personnalisés pour la logique réutilisable
+│   ├── pages/            # Pages complètes rendues par React Router
+│   ├── types/            # Définitions TypeScript pour typer les données et composants
+├── Doc/                  # Fichiers pour la documentation technique et utilisateur
+├── package.json          # Fichier listant les dépendances et scripts du projet
+├── eslint.config.js      # Configuration ESLint pour le linting du code
+├── index.html            # Fichier HTML principal pour charger l’application
+├── package-lock.json     # Snapshot des dépendances pour des installations reproductibles
+├── postcss.config.js     # Configuration pour PostCSS (utilisé pour Tailwind CSS)
+├── tailwind.config.js    # Configuration pour Tailwind CSS
+├── tsconfig.app.json     # Configuration TypeScript pour l’application
+├── tsconfig.json         # Configuration globale TypeScript du projet
+├── tsconfig.node.json    # Configuration TypeScript pour les outils de build Node.js
+├── vite.config.ts        # Configuration Vite pour le build et le développement
+└── README.md             # Documentation principale du projet          # Documentation du projet
 ```
 
 ---
