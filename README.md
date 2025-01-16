@@ -85,7 +85,7 @@ CreaTEK_Analyse_de_donnee/
 ├── tsconfig.json         # Configuration globale TypeScript du projet
 ├── tsconfig.node.json    # Configuration TypeScript pour les outils de build Node.js
 ├── vite.config.ts        # Configuration Vite pour le build et le développement
-└── README.md             # Documentation principale du projet          # Documentation du projet
+└── README.md             # Documentation principale du projet
 ```
 
 ---
