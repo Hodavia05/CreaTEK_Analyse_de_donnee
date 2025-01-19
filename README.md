@@ -23,7 +23,7 @@
 
 ### Filtres Personnalisés
 - Affinez les analyses par :
-  - Vente de bracelet
+  - Type de bracelet
   - Période
 
 ---
